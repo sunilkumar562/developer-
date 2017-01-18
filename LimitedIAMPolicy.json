@@ -1,0 +1,69 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+		{
+            "Effect": "Allow",
+            "Action": "ec2:RunInstances",
+            "Resource": [
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:subnet/REPLICATION_SERVERS_SUBNET",
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:subnet/REPLICA_SUBNET", 
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:instance/*",
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:volume/*",
+                "arn:aws:ec2:*::image/*",
+                "arn:aws:ec2:*::snapshot/*",
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:network-interface/*",
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:key-pair/*",
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:security-group/*",
+                "arn:aws:ec2:*:AWS_ACCOUNT_ID:vpc/*"
+            ]
+        },
+		{
+            "Action": [
+                "ec2:AttachVolume",
+                "ec2:DetachVolume",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:TerminateInstances"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:ec2:*:AWS_ACCOUNT_ID:instance/*",
+            "Condition": {
+                "StringLike": {
+                    "ec2:ResourceTag/CloudEndure creation time": "*"
+                }
+            }
+        },
+        {
+            "Action": [
+                "ec2:AttachVolume",
+                "ec2:DetachVolume",
+               "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:TerminateInstances"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:ec2:*:AWS_ACCOUNT_ID:instance/*",
+            "Condition": {
+                "StringLike": {
+                    "ec2:ResourceTag/CloudEndure_Replication_Service": "*"
+                }
+            }
+
+        },		
+        {
+            "Action": [
+                "ec2:AttachVolume",
+                "ec2:DetachVolume",
+               "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:TerminateInstances"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:ec2:*:AWS_ACCOUNT_ID:instance/*",
+            "Condition": {
+                "StringLike": {
+					"ec2:ResourceTag/Name": "CloudEndure Machine Converter*"                }
+            }
+        }
+	]
+}

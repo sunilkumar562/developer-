@@ -1,0 +1,5 @@
+[cloudagent]
+name=cloudendure
+baseurl="https://console.cloudendure.com/packages/centos/$releaserver/os/$basearch/"
+enabled=1
+gpgcheck=0
